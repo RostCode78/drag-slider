@@ -9,12 +9,12 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #8484f3;
+    background-color: #F9F5F4;
 }
 
 #slider_container {
     width: 320px;
-    height: 450px;
+    height: 460px;
     background-color: #F9F5F4;
     overflow: hidden;
     white-space: nowrap;
@@ -33,44 +33,23 @@ header {
     width: 100%;
     height: 100%;
     display: inline-flex;
+    overflow: hidden;
+}
+
+.item img {
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: contain;
+    /* prevent original image from dragging */
+    pointer-events: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
 }
 
 .wrap {
     margin-left: -4px;
-}
-
-.item:nth-child(9n+1) {
-    background: dodgerblue;
-}
-
-.item:nth-child(9n+2) {
-    background: goldenrod;
-}
-
-.item:nth-child(9n+3) {
-    background: paleturquoise;
-}
-
-.item:nth-child(9n+4) {
-    background: gold;
-}
-
-.item:nth-child(9n+5) {
-    background: cadetblue;
-}
-
-.item:nth-child(9n+6) {
-    background: tomato;
-}
-
-.item:nth-child(9n+7) {
-    background: lightcoral;
-}
-
-.item:nth-child(9n+8) {
-    background: darkslateblue;
-}
-
-.item:nth-child(9n+9) {
-    background: rebeccapurple;
 }
