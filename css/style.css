@@ -39,39 +39,39 @@ header {
     margin-left: -4px;
 }
 
-.item:nth-child(9n+1) {
+.item:nth-child(1) {
     background: dodgerblue;
 }
 
-.item:nth-child(9n+2) {
+.item:nth-child(2) {
     background: goldenrod;
 }
 
-.item:nth-child(9n+3) {
+.item:nth-child(3) {
     background: paleturquoise;
 }
 
-.item:nth-child(9n+4) {
+.item:nth-child(4) {
     background: gold;
 }
 
-.item:nth-child(9n+5) {
+.item:nth-child(5) {
     background: cadetblue;
 }
 
-.item:nth-child(9n+6) {
+.item:nth-child(6) {
     background: tomato;
 }
 
-.item:nth-child(9n+7) {
+.item:nth-child(7) {
     background: lightcoral;
 }
 
-.item:nth-child(9n+8) {
+.item:nth-child(8) {
     background: darkslateblue;
 }
 
-.item:nth-child(9n+9) {
+.item:nth-child(9) {
     background: rebeccapurple;
 }
 

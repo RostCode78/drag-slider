@@ -10,7 +10,7 @@ let walk;
 let position = 0;
 let mouseMove = false;
 let width = 320;
-let target = 0;
+let focus;
 slider.scrollLeft = 0;
 
 slider.addEventListener('mousedown', (e) => {
@@ -41,24 +41,48 @@ slider.addEventListener('mouseup', () => {
     }
 
     if ( mouseMove ) {
-        if ( slider.scrollLeft < 320 && position == target ) {
+        if ( slider.scrollLeft < 320 && position == 0 ) {
 
             position++; // 1
-            log(`Target: ${position}`);
-            target = position;
+            log(`Focus: ${position}`);
+            focus = position;
             slider.scrollLeft = width * position; // 320
 
-        } else if ( slider.scrollLeft < 320 && position == target ) {
+        } else if ( slider.scrollLeft < 320 && position == focus ) {
 
             position--; // 0
             slider.scrollLeft = width * position; // 0
 
-        } else if ( slider.scrollLeft > 320 && position == target ) {
+        } else if ( slider.scrollLeft > 320 && position == 1 ) {
 
             position++; // 2
-            target = position;
             slider.scrollLeft = width * position; // 640
 
+        } else if ( slider.scrollLeft < 640 && position == 2 ) {
+
+            position--; // 1
+            slider.scrollLeft = width * position; // 320
+
+        } else if ( slider.scrollLeft > 640 && position == 2 ) {
+
+            position++; // 3
+            slider.scrollLeft = width * position; // 960
+
+        } else if ( slider.scrollLeft < 960 && position == 3 ) {
+
+            position--; // 2
+            slider.scrollLeft = width * position; // 640
+
+        } else if ( slider.scrollLeft > 960 && position == 3 ) {
+
+            position++; // 4
+            slider.scrollLeft = width * position; // 1280
+
+        } else if ( slider.scrollLeft < 1280 && position == 4 ) {
+
+            position--; // 3
+            slider.scrollLeft = width * position; // 960
+            
         }
     }
 
