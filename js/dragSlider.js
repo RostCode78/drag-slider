@@ -3,13 +3,14 @@ const $$ = document.querySelectorAll.bind(document);
 const log = console.log;
 
 const slider = $('#slider_container');
+let elementStyle = window.getComputedStyle(slider).getPropertyValue('width');
 let isDown = false;
 let startX;
 let scrollLeft;
 let walk;
 let position = 0;
 let mouseMove = false;
-let width = 320;
+let width = elementStyle.slice(0,-2);
 let target = 0;
 let nextTarget;
 slider.scrollLeft = 0;
@@ -121,3 +122,4 @@ slider.addEventListener('mousemove', (e) => {
     walk = (x - startX) * 1;
     slider.scrollLeft = scrollLeft - walk;
 });
+
