@@ -9,19 +9,18 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #F9F5F4;
+    background-color: #837ed8;
 }
 
 #slider_container {
-    width: 320px;
-    height: 460px;
+    width: 280px;
+    height: 360px;
     background-color: #F9F5F4;
     overflow: hidden;
     white-space: nowrap;
     position: relative;
     cursor: pointer;
     transition: 4s;
-    scroll-behavior: smooth;
 }
 
 #slider_container.active {
@@ -34,6 +33,16 @@ header {
     height: 100%;
     display: inline-flex;
     overflow: hidden;
+}
+
+#slider_container.active .item {
+    pointer-events: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .item img {

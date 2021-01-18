@@ -15,7 +15,7 @@ let target = 0;
 let nextTarget;
 slider.scrollLeft = 0;
 
-slider.addEventListener('mousedown', (e) => {
+slider.addEventListener('pointerdown', (e) => {
     isDown = true;
     slider.classList.add('active');
     startX = e.pageX - slider.offsetLeft;
@@ -24,7 +24,7 @@ slider.addEventListener('mousedown', (e) => {
     mouseMove = false;
 });
 
-slider.addEventListener('mouseleave', () => {
+slider.addEventListener('pointerleave', () => {
     isDown = false;
     slider.classList.remove('active');
     slider.style.scrollBehavior = 'smooth';
@@ -69,7 +69,7 @@ slider.addEventListener('mouseleave', () => {
     mouseMove = false;
 });
 
-slider.addEventListener('mouseup', () => {
+slider.addEventListener('pointerup', () => {
     isDown = false;
     slider.classList.remove('active');
     slider.style.scrollBehavior = 'smooth';
@@ -114,7 +114,7 @@ slider.addEventListener('mouseup', () => {
     mouseMove = false;
 });
 
-slider.addEventListener('mousemove', (e) => {
+slider.addEventListener('pointermove', (e) => {
     if (!isDown) return; // stop the fn from running
     e.preventDefault();
     mouseMove = true;
