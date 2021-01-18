@@ -7,11 +7,13 @@ let isDown = false;
 let startX;
 let scrollLeft;
 let walk;
+slider.scrollLeft = 0;
+
 let position = 0;
 let mouseMove = false;
 let width = 320;
-let focus;
-slider.scrollLeft = 0;
+let target = 0;
+let nextTarget;
 
 slider.addEventListener('mousedown', (e) => {
     isDown = true;
@@ -19,7 +21,7 @@ slider.addEventListener('mousedown', (e) => {
     startX = e.pageX - slider.offsetLeft;
     scrollLeft = slider.scrollLeft;
     slider.style.scrollBehavior = 'inherit';
-    log(scrollLeft);
+    log({scrollLeft, position, width, target, nextTarget});
     mouseMove = false;
 });
 
@@ -41,55 +43,32 @@ slider.addEventListener('mouseup', () => {
     }
 
     if ( mouseMove ) {
-        if ( slider.scrollLeft < 320 && position == 0 ) {
+        if ( slider.scrollLeft < width && position == 0 ) {
 
             position++; // 1
-            log(`Focus: ${position}`);
-            focus = position;
-            slider.scrollLeft = width * position; // 320
+            target = position;
+            slider.scrollLeft = width * target; // 320
+            nextTarget = width * target;
 
-        } else if ( slider.scrollLeft < 320 && position == 1 ) {
+        } else if ( slider.scrollLeft < nextTarget && position == target ) {
 
             position--; // 0
-            log(`Focus: ${position}`);
-            slider.scrollLeft = width * position; // 0
+            target = position;
+            slider.scrollLeft = width * target; // 0
 
-        } else if ( slider.scrollLeft > 320 && position == 1 ) {
+        } else if ( slider.scrollLeft > width && position == target ) {
 
             position++; // 2
-            log(`Focus: ${position}`);
-            slider.scrollLeft = width * position; // 640
+            target = position;
+            slider.scrollLeft = width * target; // 640
+            nextTarget = width * target;
 
-        } else if ( slider.scrollLeft < 640 && position == 2 ) {
+        } else if ( slider.scrollLeft < nextTarget && position == target ) {
 
             position--; // 1
-            log(`Focus: ${position}`);
-            slider.scrollLeft = width * position; // 320
+            target = position;
+            slider.scrollLeft = width * target; // 320
 
-        } else if ( slider.scrollLeft > 640 && position == 2 ) {
-
-            position++; // 3
-            log(`Focus: ${position}`);
-            slider.scrollLeft = width * position; // 960
-
-        } else if ( slider.scrollLeft < 960 && position == 3 ) {
-
-            position--; // 2
-            log(`Focus: ${position}`);
-            slider.scrollLeft = width * position; // 640
-
-        } else if ( slider.scrollLeft > 960 && position == 3 ) {
-
-            position++; // 4
-            log(`Focus: ${position}`);
-            slider.scrollLeft = width * position; // 1280
-
-        } else if ( slider.scrollLeft < 1280 && position == 4 ) {
-
-            position--; // 3
-            log(`Focus: ${position}`);
-            slider.scrollLeft = width * position; // 960
-            
         }
     }
 
