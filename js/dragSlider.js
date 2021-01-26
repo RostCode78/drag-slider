@@ -14,9 +14,6 @@ let mouseMove = false;
 let width = elementStyle.slice(0,-2);
 let target = 0;
 let nextTarget;
-let intervalCount = 1;
-let subir = true;
-let autoOn = false;
 slider.scrollLeft = 0;
 
 const intervalFunction = () => {
