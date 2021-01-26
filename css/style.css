@@ -13,14 +13,13 @@ header {
 }
 
 #slider_container {
-    width: 280px;
-    height: 360px;
-    background-color: #F9F5F4;
+    width: 420px;
+    height: 550px;
+    background-color: #df9582;
     overflow: hidden;
     white-space: nowrap;
     position: relative;
     cursor: pointer;
-    transition: 4s;
 }
 
 #slider_container.active {
@@ -50,6 +49,7 @@ header {
     min-width: 100%;
     min-height: 100%;
     object-fit: contain;
+    object-position: bottom;
     /* prevent original image from dragging */
     pointer-events: none;
     -webkit-user-drag: none;
