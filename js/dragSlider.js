@@ -16,42 +16,7 @@ let target = 0;
 let nextTarget;
 slider.scrollLeft = 0;
 
-const intervalFunction = () => {
-
-    slider.style.scrollBehavior = 'smooth';
-
-    if ( intervalCount == 1 ) {
-        subir = true;
-    } else if ( intervalCount >= items.length ) {
-        subir = false;
-    }
-
-    if( subir ) {
-
-        intervalCount++;
-
-        position++;
-        target = position;
-        slider.scrollLeft = width * target;
-        nextTarget = width * target;
-
-    } else {
-
-        intervalCount--;
-
-        position--;
-        target = position;
-        slider.scrollLeft = width * target;
-        nextTarget = width * target;
-
-    }
-
-}
-
-let auto = setInterval(intervalFunction, 5000); // Ejecuta el setInterval
-
 slider.addEventListener('pointerdown', (e) => {
-    clearInterval(auto);
     isDown = true;
     slider.classList.add('active');
     startX = e.pageX - slider.offsetLeft;
@@ -98,8 +63,6 @@ slider.addEventListener('pointerleave', () => {
     }
     
     mouseMove = false;
-    intervalCount = target + 1;
-    auto = setInterval(intervalFunction, 5000); // Retorna el setInterval
 });
 
 slider.addEventListener('pointerup', () => {
@@ -143,14 +106,11 @@ slider.addEventListener('pointerup', () => {
     }
 
     mouseMove = false;
-    intervalCount = target + 1;
-    auto = setInterval(intervalFunction, 5000); // Retorna el setInterval
 });
 
 slider.addEventListener('pointermove', (e) => {
     if (!isDown) return; // stop the fn from running
     e.preventDefault();
-    clearInterval(auto);
     mouseMove = true;
     const x = e.pageX - slider.offsetLeft;
     walk = (x - startX) * 1;
