@@ -6,15 +6,52 @@ const slider = $('#slider_container');
 const items = $$('.item');
 let elementStyle = window.getComputedStyle(slider).getPropertyValue('width');
 let isDown = false;
-let startX;
-let scrollLeft;
-let walk;
+let startX, scrollLeft, walk, nextTarget;
 let position = 0;
 let mouseMove = false;
 let width = elementStyle.slice(0,-2);
 let target = 0;
-let nextTarget;
 slider.scrollLeft = 0;
+
+// Variables para auto-slider
+let direction = true; // True = Next - False = Prev
+let autoSlider = true;
+let count = 1;
+
+let autoSliderInterval = () => {
+
+    if ( count == 1 ) {
+        direction = true;
+    } else if ( count >= items.length ) {
+        direction = false;
+    }
+
+    if ( direction ) {
+        count++;
+        position++;
+        target = position;
+        slider.scrollLeft = width * target;
+        nextTarget = width * target;
+    } else {
+        count--;
+        position--;
+        target = position;
+        slider.scrollLeft = width * target;
+        nextTarget = width * target;
+    }
+
+};
+
+let counter = setInterval(autoSliderInterval, 5000);
+
+let stopInterval = () => {
+    clearInterval(counter);
+};
+
+let restartInterval = () => {
+    clearInterval(counter);
+    counter = setInterval(autoSliderInterval, 5000);
+}
 
 slider.addEventListener('pointerdown', (e) => {
     isDown = true;
@@ -23,6 +60,7 @@ slider.addEventListener('pointerdown', (e) => {
     scrollLeft = slider.scrollLeft;
     slider.style.scrollBehavior = 'inherit';
     mouseMove = false;
+    stopInterval();
 });
 
 slider.addEventListener('pointerleave', () => {
@@ -49,7 +87,7 @@ slider.addEventListener('pointerleave', () => {
             target = position;
             slider.scrollLeft = width * target;
             nextTarget = width * target;
-            subir = false;
+            direction = false;
 
         } else if ( slider.scrollLeft > nextTarget && position == target ) {
 
@@ -57,12 +95,14 @@ slider.addEventListener('pointerleave', () => {
             target = position;
             slider.scrollLeft = width * target;
             nextTarget = width * target;
-            subir = true;
+            direction = true;
 
         }
     }
     
     mouseMove = false;
+    count = target + 1;
+    restartInterval();
 });
 
 slider.addEventListener('pointerup', () => {
@@ -82,7 +122,6 @@ slider.addEventListener('pointerup', () => {
             target = position;
             slider.scrollLeft = width * target;
             nextTarget = width * target;
-            log('start');
 
         } else if ( slider.scrollLeft < nextTarget && position == target ) {
 
@@ -90,8 +129,7 @@ slider.addEventListener('pointerup', () => {
             target = position;
             slider.scrollLeft = width * target;
             nextTarget = width * target;
-            log('prev');
-            subir = false;
+            direction = false;
 
         } else if ( slider.scrollLeft > nextTarget && position == target ) {
 
@@ -99,13 +137,14 @@ slider.addEventListener('pointerup', () => {
             target = position;
             slider.scrollLeft = width * target;
             nextTarget = width * target;
-            log('next');
-            subir = true;
+            direction = true;
 
         }
     }
 
     mouseMove = false;
+    count = target + 1;
+    restartInterval();
 });
 
 slider.addEventListener('pointermove', (e) => {
